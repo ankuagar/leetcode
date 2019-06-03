@@ -18,9 +18,25 @@ class LinkedList(object):
             new_head.next = self.head
             self.head = new_head
 
+    def reverse(self):
+        """
+        Uses a stack to reverse the LinkedList
+        """
+        stack = []
+        current = self.head
+        # store LinkedList items in stack
+        while current is not None:
+            stack.append(current.data)
+            current = current.next
+        # Iterate over stack items and insert into list, thereby reversing the list
+        current = self.head
+        for i in stack[::-1]:
+            current.data = i
+            current = current.next
+
     def print_list(self):
         current = self.head
         while current is not None:
-            print(str(current.data) + ' ', end ='')
+            print(str(current.data) + '->', end ='')
             current = current.next
         print()
