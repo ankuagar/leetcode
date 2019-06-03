@@ -34,6 +34,29 @@ class LinkedList(object):
             current.data = i
             current = current.next
 
+    def reverse1(self):
+        """
+        Reverses the list in place i.e. uses not extra space to reverse the list
+        """
+        # find tail
+        tail = self.head
+        while tail.next is not None:
+            tail = tail.next
+        print(tail.data)
+
+    def reverse2(self):
+        """
+        Reverses the current list by iterating over it and inserting the elements in a new list.
+        Returns the new reversed list object
+        """
+        current = self.head
+        reversed_list = LinkedList()
+        while current is not None:
+            reversed_list.insert(current.data)
+            current = current.next
+        return reversed_list
+
+
     def print_list(self):
         current = self.head
         while current is not None:
