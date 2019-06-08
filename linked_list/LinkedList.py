@@ -36,13 +36,15 @@ class LinkedList(object):
 
     def reverse1(self):
         """
-        Reverses the list in place i.e. uses not extra space to reverse the list
+        Reverses the list in place i.e. uses no extra space to reverse the list
         """
-        # find tail
-        tail = self.head
-        while tail.next is not None:
-            tail = tail.next
-        print(tail.data)
+        reversed = None # contains Node sequence in reversed order
+        while self.head is not None:
+            current = self.head
+            self.head = self.head.next
+            current.next = reversed
+            reversed = current
+        self.head = reversed
 
     def reverse2(self):
         """
