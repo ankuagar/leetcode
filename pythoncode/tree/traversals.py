@@ -209,6 +209,7 @@ class Solution(object):
         :type root: TreeNode
         :type sum: int
         :rtype: bool
+        top down approach
         """
         def helper(root, cs, sum):
             if root is None:
