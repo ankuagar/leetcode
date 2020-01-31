@@ -260,3 +260,39 @@ class Solution(object):
         
         return root
         
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    """
+    Create tree from given inorder and preorder traversal
+    """
+
+    def buildTree(self, preorder, inorder):
+        """
+        :type preorder: List[int]
+        :type inorder: List[int]
+        :rtype: TreeNode
+        """
+        if len(inorder) != len(preorder):
+            print "Invalid Input"
+            return None
+        elif len(inorder) == 0 or len(preorder) == 0:
+            return None
+        elif inorder is None or preorder is None:
+            return None 
+        elif len(inorder) == 1: #or len(preorder) == 1
+            return TreeNode(preorder[0])
+        root_val = preorder[0]
+        root = TreeNode(root_val)
+        root_index = inorder.index(root_val)
+        root.left = self.buildTree(preorder[1:root_index+1], inorder[0:root_index])
+        root.right = self.buildTree(preorder[root_index+1:], inorder[root_index+1:])
+        
+        return root
+        
+        
