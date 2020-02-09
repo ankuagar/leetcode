@@ -1,4 +1,5 @@
 from collections import deque
+import time
 class Solution(object):
     def openLock(self, deadends, target):
         """
@@ -18,19 +19,22 @@ class Solution(object):
         if start in deadends:
             return -1
         q = deque()
-        visited = dict()
-        visited[start] = 0
+        visited = set()
         q.append(start)
+        visited.add(start)
+        step = 0       
         while len(q) != 0:
-            node = q.popleft()
-            for item in create_next_steps(node):
-                if item == target:
-                    return visited[node] + 1
-                elif item in visited or item in deadends:
-                    pass
-                else:
-                    q.append(item)
-                    visited[item] = visited[node] + 1
+            step += 1
+            qsize = len(q)
+            for i in xrange(qsize):
+                for item in create_next_steps(q.popleft()):
+                    if item == target:
+                        return step
+                    elif item in visited or item in deadends:
+                        pass
+                    else:
+                        q.append(item)
+                        visited.add(item)
         return -1
 
 deadends = ["0201","0101","0102","1212","2002"] 
