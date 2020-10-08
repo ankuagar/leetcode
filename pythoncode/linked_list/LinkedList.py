@@ -1,3 +1,4 @@
+
 class LinkedList(object):
     """
     Inserts new Nodes at the beginning of the list
@@ -58,6 +59,28 @@ class LinkedList(object):
             current = current.next
         return reversed_list
 
+    def swap_nth_node(self, n):
+        if self.head is None:
+            return self.head
+        if n == 1:
+            return self.head
+        count = 1
+        current = self.head # current contains 1 node before the one to be swapped
+        while count < n - 1:
+            current = current.next
+            count += 1
+            if current is None:
+                return None
+        temp1 = current.next # temp1 is the node to be swapped with head
+        if temp1 is None:
+            return None
+        #temp2 = self.head.next # don't store temp2 here
+        current.next = self.head
+        temp2 = self.head.next # critical to store temp2 here
+        current.next.next = temp1.next
+        self.head = temp1
+        temp1.next = temp2
+        return self.head
 
     def print_list(self):
         current = self.head

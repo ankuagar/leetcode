@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from LinkedList import LinkedList
 
 ll = LinkedList()
 for i in range(10):
     ll.insert(i)
-ll.print_list()
+# ll.print_list()
 # ll.reverse()
 # ll.print_list()
 # ll.reverse1()
@@ -13,3 +13,24 @@ ll.print_list()
 
 ll.reverse1()
 ll.print_list()
+
+# ll.swap_nth_node(1)
+# ll.print_list()
+# ll.swap_nth_node(2)
+# ll.print_list()
+# ll.swap_nth_node(3)
+# ll.print_list()
+# ll.swap_nth_node(4)
+# ll.print_list()
+# ll.swap_nth_node(5)
+# ll.print_list()
+# ll.swap_nth_node(6)
+# ll.print_list()
+# ll.swap_nth_node(7)
+# ll.print_list()
+# ll.swap_nth_node(8)
+# ll.print_list()
+# ll.swap_nth_node(9)
+# ll.print_list()
+# ll.swap_nth_node(10)
+# ll.print_list()
