@@ -88,3 +88,33 @@ class LinkedList(object):
             print(str(current.data) + '->', end ='')
             current = current.next
         print()
+
+    @staticmethod
+    def merge_sorted(ll1, ll2):
+        if ll1.head is None:
+            return ll2
+        elif ll2.head is None:
+            return ll1
+        new_tail = None
+        ll3 = LinkedList()
+        while ll1.head is not None and ll2.head is not None:
+            if ll1.head.data <= ll2.head.data:
+                if ll3.head is None:
+                    ll3.head = new_tail = ll1.head
+                else:
+                    new_tail.next = ll1.head
+                    new_tail = new_tail.next
+                ll1.head = ll1.head.next
+            else:
+                if ll3.head is None:
+                    ll3.head = new_tail = ll2.head
+                else:
+                    new_tail.next = ll2.head
+                    new_tail = new_tail.next
+                ll2.head = ll2.head.next
+
+        if ll1.head is None:
+            new_tail.next = ll2.head
+        else:
+            new_tail.next = ll1.head
+        return ll3
