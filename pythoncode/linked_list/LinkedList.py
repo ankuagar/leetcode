@@ -11,6 +11,14 @@ class LinkedList(object):
     def __init__(self):
         self.head = None
 
+    def __str__(self):
+        current = self.head
+        l = []
+        while current is not None:
+            l.append(str(current.data))
+            current = current.next
+        return '->'.join(l) + '->'
+
     def insert(self, data):
         if self.head is None:
             self.head = LinkedList.Node(data)
@@ -81,6 +89,13 @@ class LinkedList(object):
         self.head = temp1
         temp1.next = temp2
         return self.head
+
+    def print_list(self):
+        current = self.head
+        while current is not None:
+            print(str(current.data) + '->', end ='')
+            current = current.next
+        print()
 
     def print_list(self):
         current = self.head
