@@ -9,7 +9,7 @@ class LinkedList(object):
             self.next = None
 
     def __init__(self):
-        self.head = None
+        self.head  = self.tail = None
 
     def __str__(self):
         current = self.head
@@ -26,6 +26,14 @@ class LinkedList(object):
             new_head = LinkedList.Node(data)
             new_head.next = self.head
             self.head = new_head
+
+    def insert_at_tail(self, data):
+        if self.head is None:
+            self.head =  LinkedList.Node(data)
+            self.tail = self.head
+        else:
+            self.tail.next = LinkedList.Node(data)
+            self.tail = self.tail.next
 
     def reverse(self):
         """
@@ -103,6 +111,52 @@ class LinkedList(object):
             print(str(current.data) + '->', end ='')
             current = current.next
         print()
+
+    @staticmethod
+    def add_two_numbers(ll1, ll2):
+        '''
+        Adds the two numbers expressed as LinkedLists and returns the answer in new LinkedList
+        Example:
+            Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+            Output: 7 -> 0 -> 8
+            Explanation: 342 + 465 = 807.
+        Args:
+            ll1 (LinkedList): The first number represented as LinkedList.
+            ll2 (LinkedList): The second number represented as LinkedList.
+
+        Returns:
+            LinkedList: The sum expressed as a LinkedList.
+        '''
+        if ll1 is None:
+            return ll2
+        elif ll2 is None:
+            return ll1
+        else:
+            ll3 = LinkedList()
+            current1, current2, carry = ll1.head, ll2.head, 0
+            while current1 is not None and current2 is not None:
+                result = current1.data + current2.data + carry
+                digit, carry = result % 10, result//10
+                ll3.insert_at_tail(digit)
+                current1, current2 = current1.next, current2.next
+
+            while current1 is not None:
+                result = current1.data + carry
+                digit, carry = result % 10, result//10
+                ll3.insert_at_tail(digit)
+                current1 = current1.next
+
+            while current2 is not None:
+                result = current2.data + carry
+                digit, carry = result % 10, result//10
+                ll3.insert_at_tail(digit)
+                current2 = current2.next
+
+            if carry != 0:
+                ll3.insert_at_tail(carry)
+
+            return ll3
+
 
     @staticmethod
     def merge_sorted(ll1, ll2):

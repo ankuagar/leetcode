@@ -115,9 +115,85 @@ def test_merge_sorted3():
     ll3 = LinkedList.merge_sorted(ll1, ll2)
     t.assertEqual(str(ll3), '0->1->1->2->3->4->5->6->7->8->9->10->15->')
 
+def test_add_two_numbers():
+    ll1 = LinkedList()
+    for i in [9, 9, 0, 1]:
+        ll1.insert(i)
+    t.assertEqual(str(ll1), '1->0->9->9->')
+
+    ll2 = LinkedList()
+    for i in [2, 3, 7]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '7->3->2->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '8->3->1->0->1->')
+
+    ll1 = LinkedList()
+    for i in [2, 4, 3]:
+        ll1.insert(i)
+    t.assertEqual(str(ll1), '3->4->2->')
+
+    ll2 = LinkedList()
+    for i in [5, 6, 4]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '4->6->5->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '7->0->8->')
+
+    ll1 = LinkedList()
+    for i in [2]:
+        ll1.insert(i)
+    t.assertEqual(str(ll1), '2->')
+
+    ll2 = LinkedList()
+    for i in [5]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '5->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '7->')
+
+    ll1 = LinkedList()
+    ll2 = LinkedList()
+    for i in [5]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '5->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '5->')
+
+    ll1 = LinkedList()
+    for i in [2]:
+        ll1.insert(i)
+    t.assertEqual(str(ll1), '2->')
+
+    ll2 = LinkedList()
+    for i in [7, 8, 9]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '9->8->7->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '1->9->7->')
+
+    ll1 = LinkedList()
+    for i in [7, 8, 9]:
+        ll1.insert(i)
+    t.assertEqual(str(ll1), '9->8->7->')
+
+    ll2 = LinkedList()
+    for i in [5]:
+        ll2.insert(i)
+    t.assertEqual(str(ll2), '5->')
+
+    ll3 = LinkedList.add_two_numbers(ll1, ll2)
+    t.assertEqual(str(ll3), '4->9->7->')
+
 
 test_reverse()
 test_swap_node()
 test_merge_sorted1()
 test_merge_sorted2()
 test_merge_sorted3()
+test_add_two_numbers()
