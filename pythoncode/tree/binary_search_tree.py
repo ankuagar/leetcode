@@ -30,7 +30,7 @@ class InorderIterator(object):
     '''
     Will throw an exception if called despite hasNext returning False
     '''
-    return self.inorder.pop().val # pop from right end
+    return self.inorder.pop().data # pop from right end
 
 class InorderIterator1(object):
   """
@@ -62,12 +62,12 @@ class InorderIterator1(object):
     temp = self.inorder.pop()
     if temp.right is not None: # populate self.inorder with the right subtree of the given node
         self.__populate_inorder_stack(temp.right)
-    return temp.val
+    return temp.data
 
 #Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val):
-        self.val = val
+        self.data = val
         self.left = None
         self.right = None
 
@@ -79,9 +79,9 @@ class Tree(object):
         def insert_helper(root, val):        
             if root is None:
                 return TreeNode(val)
-            elif val < root.val:
+            elif val < root.data:
                 root.left =  insert_helper(root.left, val)
-            elif val > root.val:
+            elif val > root.data:
                 root.right = insert_helper(root.right, val)
             return root 
         self.root = insert_helper(self.root, val)
@@ -92,7 +92,7 @@ class Tree(object):
             if root is None:
                 return
             else:
-                preorder.append(root.val)
+                preorder.append(root.data)
                 pre_order_helper(root.left)
                 pre_order_helper(root.right)
         pre_order_helper(self.root)
@@ -118,9 +118,35 @@ class Tree(object):
                 root = root.left
                 continue
             temp = stack.pop()
-            inorder.append(temp.val)
+            inorder.append(temp.data)
             root = temp.right
         return inorder
+
+    def inorder_successor(self, d):
+        '''
+        In inorder traversal the successor of a given value is always larger than the given value
+        It is the smallest number which is larger than the given value d
+        Memory usage is O(1) since it only stores the successor at any given point
+        Runtime is O(h), h = height of tree since it visits the leaf node at maximum depth in the worst case
+        '''
+        successor = None
+        root = self.root
+        while root is not None:
+            if d < root.data: # value less than current Node
+                successor = root # make current Node as successor
+                root = root.left # go left
+            elif d > root.data: # if value greator than current Node
+                root = root.right # go right
+            else:
+                if root.right is None:
+                        return successor.data if successor is not None else None
+                else:
+                    # return the smallest number which is larger than the given value d
+                    successor = root.right 
+                    while successor.left is not None:
+                        successor = successor.left
+                    return successor.data
+        return None # if value d is not found, return None
 
     @staticmethod
     def are_identical(root1, root2):
@@ -128,9 +154,9 @@ class Tree(object):
             return True
         elif root1 == None or root2 == None:
             return False
-        elif root1.val != root2.val:
+        elif root1.data != root2.data:
             return False
-        elif root1.val == root2.val:
+        elif root1.data == root2.data:
             return Tree.are_identical(root1.left, root2.left) and Tree.are_identical(root1.right, root2.right)
 
 

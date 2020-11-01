@@ -259,3 +259,59 @@ t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
 # to make sure tree is not modified by inorder_iterative
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+
+
+# Test inorder_successor
+lst = [100,50,75,200,25,125,350]
+tree = Tree()
+insert(tree, lst)
+# [25, 50, 75, 100, 125, 200, 350]
+t.assertAlmostEqual(None, tree.inorder_successor(20))
+t.assertAlmostEqual(50, tree.inorder_successor(25))
+t.assertAlmostEqual(None, tree.inorder_successor(30))
+t.assertAlmostEqual(75, tree.inorder_successor(50))
+t.assertAlmostEqual(None, tree.inorder_successor(55))
+t.assertAlmostEqual(100, tree.inorder_successor(75))
+t.assertAlmostEqual(None, tree.inorder_successor(90))
+t.assertAlmostEqual(125, tree.inorder_successor(100))
+t.assertAlmostEqual(None, tree.inorder_successor(110))
+t.assertAlmostEqual(200, tree.inorder_successor(125))
+t.assertAlmostEqual(None, tree.inorder_successor(130))
+t.assertAlmostEqual(350, tree.inorder_successor(200))
+t.assertAlmostEqual(None, tree.inorder_successor(210))
+t.assertAlmostEqual(None, tree.inorder_successor(350))
+t.assertAlmostEqual(None, tree.inorder_successor(400))
+
+
+lst =  [100, 200, 300, 400, 500]
+tree = Tree()
+insert(tree, lst)
+# [100, 200, 300, 400, 500]]
+t.assertAlmostEqual(None, tree.inorder_successor(20))
+t.assertAlmostEqual(200, tree.inorder_successor(100))
+t.assertAlmostEqual(None, tree.inorder_successor(110))
+t.assertAlmostEqual(300, tree.inorder_successor(200))
+t.assertAlmostEqual(None, tree.inorder_successor(210))
+t.assertAlmostEqual(400, tree.inorder_successor(300))
+t.assertAlmostEqual(None, tree.inorder_successor(310))
+t.assertAlmostEqual(500, tree.inorder_successor(400))
+t.assertAlmostEqual(None, tree.inorder_successor(410))
+t.assertAlmostEqual(None, tree.inorder_successor(500))
+t.assertAlmostEqual(None, tree.inorder_successor(510))
+
+
+lst = [100, 90, 80, 70, 60, 50]
+tree = Tree()
+insert(tree, lst)
+# [50, 60, 70, 80, 90, 100]
+t.assertAlmostEqual(None, tree.inorder_successor(20))
+t.assertAlmostEqual(60, tree.inorder_successor(50))
+t.assertAlmostEqual(None, tree.inorder_successor(55))
+t.assertAlmostEqual(70, tree.inorder_successor(60))
+t.assertAlmostEqual(None, tree.inorder_successor(65))
+t.assertAlmostEqual(80, tree.inorder_successor(70))
+t.assertAlmostEqual(None, tree.inorder_successor(85))
+t.assertAlmostEqual(100, tree.inorder_successor(90))
+t.assertAlmostEqual(None, tree.inorder_successor(95))
+t.assertAlmostEqual(None, tree.inorder_successor(100))
+t.assertAlmostEqual(None, tree.inorder_successor(110))
