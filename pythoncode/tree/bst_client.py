@@ -197,7 +197,6 @@ while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
 
-
 # inorder_iterative test cases
 
 lst = [100,50,200,25,125,350]
@@ -212,12 +211,12 @@ insert(tree, lst)
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [])
 
-
 lst = [100]
 tree = Tree()
 insert(tree, lst)
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [100])
+
 
 lst = [100, 200, 300, 400, 500]
 tree = Tree()

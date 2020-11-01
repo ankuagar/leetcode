@@ -1,29 +1,27 @@
 class InorderIterator(object):
   """
-  This constructor implementation uses O(N) memory to keep all nodes in memory in inorder in deque called self.inorder, once the consutruction is over
+  This constructor implementation uses O(N) memory to keep all nodes in memory in inorder in deque called self.inorder,
+  once the consutruction is over
 
   During construction, at any time all visited nodes are in memory, either in self.inorder or stack
   By using extra memory, getNext is able to be implemented in O(1) time
   Time is O(N) since all nodes need to be visited
+  This implementation does not modify the original tree
   """
   def __init__(self, root):
     from collections import deque
     if root is None: # tree is empty
         raise Exception("Iteration not possible on empty tree")
-    self.inorder = deque() # contains nodes in "inorder" insert from left and pop from right (inorder starts from rightmost end)
+    self.inorder = deque() # contains nodes in "inorder" insert from left and pop from right (inorder starts from right end)
     stack = [] # order in which nodes are processed
-    stack.append(root)
-    while len(stack) > 0:
-      current = stack[-1]
-      if current.left is not None:
-        stack.append(current.left)
-      else:
-        stack.pop()
-        if len(stack) > 0:
-          stack[-1].left = None
-        self.inorder.appendleft(current)
-        if current.right is not None:
-          stack.append(current.right)
+    while len(stack) > 0 or root is not None:
+      if root is not None:
+          stack.append(root)
+          root = root.left
+          continue
+      temp = stack.pop()
+      self.inorder.appendleft(temp) # append at left end
+      root = temp.right
 
   def hasNext(self):
     return len(self.inorder) > 0
@@ -32,15 +30,15 @@ class InorderIterator(object):
     '''
     Will throw an exception if called despite hasNext returning False
     '''
-    return self.inorder.pop().val
+    return self.inorder.pop().val # pop from right end
 
 class InorderIterator1(object):
   """
-  This implementation uses O(h) memory at any time to store nodes equal to the height of the tree where
-  h = height of the tree
+  This implementation uses O(h) memory at any time (h = height of the tree) to store nodes in stack inorder
   Since not all nodes are in memory, getNext has to spend time every so often to replenish the stack that stores the
   nodes inorder
   Time is O(N) since all nodes need to be visited
+  This implementation does not modify the original tree
   """
   def __populate_inorder_stack(self, root):
       self.inorder.append(root)
@@ -51,7 +49,7 @@ class InorderIterator1(object):
   def __init__(self, root):
     if root is None: # tree is empty
         raise Exception("Iteration not possible on empty tree")
-    self.inorder = [] # contains nodes in "inorder" insert from left and pop from right (inorder starts from rightmost end)
+    self.inorder = [] # pop from right to get nodes in inorder
     self.__populate_inorder_stack(root)
 
   def hasNext(self):
@@ -105,23 +103,23 @@ class Tree(object):
         Since it stores the nodes inorder in list inorder the memory usage is O(N)
         If it was simply printing the node data inoder then the memory usage will be O(h), h = height of tree
         Time is O(N) since all nodes need to be visited
+        This implementation does not modify the original tree
         '''
         inorder = []
-        if self.root is None:
-            stack = []
-        else:
-            stack = [self.root]
-        while len(stack) > 0:
-            temp = stack[-1]
-            if temp.left is not None:
-                stack.append(temp.left)
-            else:
-                stack.pop()
-                if len(stack) > 0:
-                    stack[-1].left = None
-                if temp.right is not None:
-                    stack.append(temp.right)
-                inorder.append(temp.val)
+        # if self.root is None:
+        #     stack = []
+        # else:
+        #     stack = [self.root]
+        stack = []
+        root = self.root
+        while len(stack) > 0 or root is not None:
+            if root is not None:
+                stack.append(root)
+                root = root.left
+                continue
+            temp = stack.pop()
+            inorder.append(temp.val)
+            root = temp.right
         return inorder
 
     @staticmethod
