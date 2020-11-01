@@ -149,6 +149,13 @@ inorder = []
 while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+# to make sure tree is not modified first time around
+it = InorderIterator(tree.root)
+inorder = []
+while it.hasNext():
+    inorder.append(it.getNext())
+t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+
 
 # InorderIterator1 test cases
 
@@ -196,6 +203,12 @@ inorder = []
 while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+# to make sure tree is not modified first time around
+it = InorderIterator1(tree.root)
+inorder = []
+while it.hasNext():
+    inorder.append(it.getNext())
+t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
 
 # inorder_iterative test cases
 
@@ -204,16 +217,26 @@ tree = Tree()
 insert(tree, lst)
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [25, 50, 100, 125, 200, 350])
+# to make sure tree is not modified by inorder_iterative
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [25, 50, 100, 125, 200, 350])
 
 lst = []
 tree = Tree()
 insert(tree, lst)
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [])
+# to make sure tree is not modified by inorder_iterative
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [])
+
 
 lst = [100]
 tree = Tree()
 insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [100])
+# to make sure tree is not modified by inorder_iterative
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [100])
 
@@ -223,10 +246,16 @@ tree = Tree()
 insert(tree, lst)
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [100, 200, 300, 400, 500])
+# to make sure tree is not modified by inorder_iterative
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [100, 200, 300, 400, 500])
 
 
 lst = [100, 90, 80, 70, 60, 50]
 tree = Tree()
 insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+# to make sure tree is not modified by inorder_iterative
 inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
