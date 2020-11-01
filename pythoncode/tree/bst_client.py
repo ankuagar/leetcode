@@ -161,7 +161,6 @@ while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [25, 50, 100, 125, 200, 350])
 
-
 lst = []
 tree = Tree()
 insert(tree, lst)
@@ -180,7 +179,6 @@ while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [100])
 
-
 lst = [100, 200, 300, 400, 500]
 tree = Tree()
 insert(tree, lst)
@@ -190,8 +188,6 @@ while it.hasNext():
     inorder.append(it.getNext())
 t.assertEqual(inorder, [100, 200, 300, 400, 500])
 
-
-
 lst = [100, 90, 80, 70, 60, 50]
 tree = Tree()
 insert(tree, lst)
@@ -199,4 +195,39 @@ it = InorderIterator1(tree.root)
 inorder = []
 while it.hasNext():
     inorder.append(it.getNext())
+t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])
+
+
+# inorder_iterative test cases
+
+lst = [100,50,200,25,125,350]
+tree = Tree()
+insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [25, 50, 100, 125, 200, 350])
+
+lst = []
+tree = Tree()
+insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [])
+
+
+lst = [100]
+tree = Tree()
+insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [100])
+
+lst = [100, 200, 300, 400, 500]
+tree = Tree()
+insert(tree, lst)
+inorder = tree.inorder_iterative()
+t.assertEqual(inorder, [100, 200, 300, 400, 500])
+
+
+lst = [100, 90, 80, 70, 60, 50]
+tree = Tree()
+insert(tree, lst)
+inorder = tree.inorder_iterative()
 t.assertEqual(inorder, [50, 60, 70, 80, 90, 100])

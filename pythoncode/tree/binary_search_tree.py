@@ -4,6 +4,7 @@ class InorderIterator(object):
 
   During construction, at any time all visited nodes are in memory, either in self.inorder or stack
   By using extra memory, getNext is able to be implemented in O(1) time
+  Time is O(N) since all nodes need to be visited
   """
   def __init__(self, root):
     from collections import deque
@@ -39,6 +40,7 @@ class InorderIterator1(object):
   h = height of the tree
   Since not all nodes are in memory, getNext has to spend time every so often to replenish the stack that stores the
   nodes inorder
+  Time is O(N) since all nodes need to be visited
   """
   def __populate_inorder_stack(self, root):
       self.inorder.append(root)
@@ -97,6 +99,30 @@ class Tree(object):
                 pre_order_helper(root.right)
         pre_order_helper(self.root)
         return preorder
+
+    def inorder_iterative(self):
+        '''
+        Since it stores the nodes inorder in list inorder the memory usage is O(N)
+        If it was simply printing the node data inoder then the memory usage will be O(h), h = height of tree
+        Time is O(N) since all nodes need to be visited
+        '''
+        inorder = []
+        if self.root is None:
+            stack = []
+        else:
+            stack = [self.root]
+        while len(stack) > 0:
+            temp = stack[-1]
+            if temp.left is not None:
+                stack.append(temp.left)
+            else:
+                stack.pop()
+                if len(stack) > 0:
+                    stack[-1].left = None
+                if temp.right is not None:
+                    stack.append(temp.right)
+                inorder.append(temp.val)
+        return inorder
 
     @staticmethod
     def are_identical(root1, root2):
