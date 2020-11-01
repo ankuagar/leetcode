@@ -1,6 +1,6 @@
 
 TODO: 
-1. Try iterative solutions for preorder, inorder, postorder traversals
+1. Try iterative solutions for preorder, inorder, postorder traversals and insert into tree
 2. Improve level order traversal with DFS & BFS concepts
 
 # Definition for a binary tree node.

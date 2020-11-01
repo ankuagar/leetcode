@@ -1,3 +1,69 @@
+class InorderIterator(object):
+  """
+  This constructor implementation uses O(N) memory to keep all nodes in memory in inorder in deque called self.inorder, once the consutruction is over
+
+  During construction, at any time all visited nodes are in memory, either in self.inorder or stack
+  By using extra memory, getNext is able to be implemented in O(1) time
+  """
+  def __init__(self, root):
+    from collections import deque
+    if root is None: # tree is empty
+        raise Exception("Iteration not possible on empty tree")
+    self.inorder = deque() # contains nodes in "inorder" insert from left and pop from right (inorder starts from rightmost end)
+    stack = [] # order in which nodes are processed
+    stack.append(root)
+    while len(stack) > 0:
+      current = stack[-1]
+      if current.left is not None:
+        stack.append(current.left)
+      else:
+        stack.pop()
+        if len(stack) > 0:
+          stack[-1].left = None
+        self.inorder.appendleft(current)
+        if current.right is not None:
+          stack.append(current.right)
+
+  def hasNext(self):
+    return len(self.inorder) > 0
+
+  def getNext(self):
+    '''
+    Will throw an exception if called despite hasNext returning False
+    '''
+    return self.inorder.pop().val
+
+class InorderIterator1(object):
+  """
+  This implementation uses O(h) memory at any time to store nodes equal to the height of the tree where
+  h = height of the tree
+  Since not all nodes are in memory, getNext has to spend time every so often to replenish the stack that stores the
+  nodes inorder
+  """
+  def __populate_inorder_stack(self, root):
+      self.inorder.append(root)
+      while root.left is not None:
+          root = root.left
+          self.inorder.append(root)
+
+  def __init__(self, root):
+    if root is None: # tree is empty
+        raise Exception("Iteration not possible on empty tree")
+    self.inorder = [] # contains nodes in "inorder" insert from left and pop from right (inorder starts from rightmost end)
+    self.__populate_inorder_stack(root)
+
+  def hasNext(self):
+    return len(self.inorder) > 0
+
+  def getNext(self):
+    '''
+    Will throw an exception if called despite hasNext returning False
+    '''
+    temp = self.inorder.pop()
+    if temp.right is not None: # populate self.inorder with the right subtree of the given node
+        self.__populate_inorder_stack(temp.right)
+    return temp.val
+
 #Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, val):
