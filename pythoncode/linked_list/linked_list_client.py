@@ -190,6 +190,46 @@ def test_add_two_numbers():
     ll3 = LinkedList.add_two_numbers(ll1, ll2)
     t.assertEqual(str(ll3), '4->9->7->')
 
+def test_swap_pairs():
+    ll1 = LinkedList()
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '->')
+
+    ll1 = LinkedList()
+    for i in range(1):
+        ll1.insert(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '0->')
+
+    ll1 = LinkedList()
+    for i in range(2):
+        ll1.insert_at_tail(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '1->0->')
+
+    ll1 = LinkedList()
+    for i in range(3):
+        ll1.insert_at_tail(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '1->0->2->')
+
+    ll1 = LinkedList()
+    for i in range(4):
+        ll1.insert_at_tail(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '1->0->3->2->')
+
+    ll1 = LinkedList()
+    for i in range(5):
+        ll1.insert_at_tail(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '1->0->3->2->4->')
+
+    ll1 = LinkedList()
+    for i in range(6):
+        ll1.insert_at_tail(i)
+    ll1.swap_pairs()
+    t.assertEqual(str(ll1), '1->0->3->2->5->4->')
 
 test_reverse()
 test_swap_node()
@@ -197,3 +237,4 @@ test_merge_sorted1()
 test_merge_sorted2()
 test_merge_sorted3()
 test_add_two_numbers()
+test_swap_pairs()

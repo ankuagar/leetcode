@@ -19,6 +19,23 @@ class LinkedList(object):
             current = current.next
         return '->'.join(l) + '->'
 
+    def swap_pairs(self):
+        '''
+        Given a linked list, swap every two adjacent nodes and return its head.
+        Solve the problem without modifying the values in the list's nodes 
+        (i.e., Only nodes themselves may be changed.)
+        '''
+        def helper(head):
+            if head is not None and head.next is not None:
+                temp = head.next
+                head.next = temp.next
+                temp.next = head
+                head.next = helper(head.next)
+                return temp
+            else:
+                return head 
+        self.head = helper(self.head)
+
     def insert(self, data):
         if self.head is None:
             self.head = LinkedList.Node(data)
@@ -187,3 +204,4 @@ class LinkedList(object):
         else:
             new_tail.next = ll1.head
         return ll3
+
