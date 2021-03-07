@@ -91,6 +91,19 @@ class LinkedList(object):
             reversed_list.insert(current.data)
             current = current.next
         return reversed_list
+    
+    def reverse3(self):
+        """
+        Recursive solution to reverse the linked list in place
+        """
+        def helper(head):
+            if head is None or head.next is None:
+                return head
+            else:
+                reversed_head = helper(head.next)
+                temp, head.next, temp.next = head.next, None, head
+                return reversed_head
+        self.head = helper(self.head)
 
     def swap_nth_node(self, n):
         if self.head is None:
