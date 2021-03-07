@@ -105,6 +105,20 @@ class LinkedList(object):
                 return reversed_head
         self.head = helper(self.head)
 
+
+    def reverse4(self):
+        """
+        Iterative, uses constant extra space, similar to reverse1
+        """
+        previous = None
+        current = self.head
+        while current is not None:
+            temp = current.next
+            current.next = previous
+            previous = current
+            current = temp
+        self.head = previous 
+
     def swap_nth_node(self, n):
         if self.head is None:
             return self.head

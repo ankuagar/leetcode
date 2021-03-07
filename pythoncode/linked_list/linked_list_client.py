@@ -28,6 +28,15 @@ def test_reverse():
     t.assertEqual(str(ll), '9->8->7->6->5->4->3->2->1->0->')
     ll.reverse3()
     t.assertEqual(str(ll), '0->1->2->3->4->5->6->7->8->9->')
+    ll.reverse4()
+    t.assertEqual(str(ll), '9->8->7->6->5->4->3->2->1->0->')
+
+    ll = LinkedList()
+    for i in range(10):
+        ll.insert(i)
+    t.assertEqual(str(ll), '9->8->7->6->5->4->3->2->1->0->')
+    ll.reverse4()
+    t.assertEqual(str(ll), '0->1->2->3->4->5->6->7->8->9->')
 
 def test_swap_node():
     def create_list():
