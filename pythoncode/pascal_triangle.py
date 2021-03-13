@@ -10,7 +10,7 @@ def getElement(row, col):
     row0 has 1 column: col0
     row1 has 2 columns: col0, col1
     row2 has 3 columns: col0, col1, col2
-    
+
     item[row][col] = 1, if col = 0 or col == row
     item[row][col] = item[row-1][col-1] + item[row-1][col]
     '''
@@ -32,26 +32,26 @@ def getElement(row, col):
 t = unittest.TestCase()
 # row 0
 t.assertEqual(1, getElement(0,0))
-print(cache)
+#print(cache)
 # row 1
 t.assertEqual(1, getElement(1,0))
 t.assertEqual(1, getElement(1,1))
-print(cache)
+#print(cache)
 # row 2
 t.assertEqual(1, getElement(2,0))
 t.assertEqual(2, getElement(2,1))
 t.assertEqual(1, getElement(2,2))
-print(cache)
+#print(cache)
 # row 3
 t.assertEqual(1, getElement(3,0))
 t.assertEqual(3, getElement(3,1))
 t.assertEqual(3, getElement(3,2))
 t.assertEqual(1, getElement(3,3))
-print(cache)
+#print(cache)
 # row 4
 t.assertEqual(1, getElement(4,0))
 t.assertEqual(4, getElement(4,1))
 t.assertEqual(6, getElement(4,2))
 t.assertEqual(4, getElement(4,3))
 t.assertEqual(1, getElement(4,4))
-print(cache)
+#print(cache)
