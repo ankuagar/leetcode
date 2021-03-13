@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import unittest
-from binary_search_tree import Tree , InorderIterator, InorderIterator1
+from binary_search_tree import Tree , InorderIterator, InorderIterator1, TreeNode
 
 def insert(tree, lst):
     for elem in lst:
@@ -315,3 +315,26 @@ t.assertAlmostEqual(100, tree.inorder_successor(90))
 t.assertAlmostEqual(None, tree.inorder_successor(95))
 t.assertAlmostEqual(None, tree.inorder_successor(100))
 t.assertAlmostEqual(None, tree.inorder_successor(110))
+
+tree = Tree()
+tree.search(50)
+
+node100 = TreeNode(100)
+node50 = TreeNode(50)
+node200 = TreeNode(200)
+node25 = TreeNode(25)
+node125 = TreeNode(125)
+node350 = TreeNode(350)
+
+node50.left = node25
+node200.left = node125
+node200.right = node350
+node100.left = node50
+node100.right = node200
+tree.root = node100
+t.assertEqual(id(node100), id(tree.search(100)))
+t.assertEqual(id(node50), id(tree.search(50)))
+t.assertEqual(id(node200), id(tree.search(200)))
+t.assertEqual(id(node25), id(tree.search(25)))
+t.assertEqual(id(node125), id(tree.search(125)))
+t.assertEqual(id(node350), id(tree.search(350)))

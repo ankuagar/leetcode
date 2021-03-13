@@ -85,7 +85,22 @@ class Tree(object):
                 root.right = insert_helper(root.right, val)
             return root 
         self.root = insert_helper(self.root, val)
-    
+
+    def search(self, val):
+        """
+        You are given the root of a binary search tree (BST) and an integer val.
+        Find the node in the BST that the node's value equals val and return the 
+        subtree rooted with that node. If such a node does not exist, return null.
+        """
+        def helper(root, val):
+            if root is None or root.data == val:
+                return root
+            elif val > root.data:
+                return helper(root.right, val)
+            elif val <= root.data:
+                return helper(root.left, val)
+        return helper(self.root, val)
+
     def pre_order(self):
         preorder = []
         def pre_order_helper(root):
@@ -158,9 +173,3 @@ class Tree(object):
             return False
         elif root1.data == root2.data:
             return Tree.are_identical(root1.left, root2.left) and Tree.are_identical(root1.right, root2.right)
-
-
-    
-
-
-
