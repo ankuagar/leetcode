@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import functools
+import unittest
+
 class Heap(object):
     '''
     Min Heap. Every root node is <= child nodes
@@ -82,32 +83,66 @@ class Heap(object):
             parent = list(filter(lambda x: x <= self.size(),temp))
             print()
     
+t = unittest.TestCase()
+obj = Heap(4) # capacity is 4
+t.assertEqual(0, obj.size())
+t.assertEqual([], obj.arr)
 
-obj = Heap(10)
-obj.print_heap()
-print("--")
 obj.push(8)
-obj.print_heap()
-print("--")
-obj.push(4)
-obj.print_heap()
-print("--")
-obj.push(3)
-obj.print_heap()
-print("--")
-obj.push(5)
-obj.print_heap()
-print("--")
-obj.pop()
-obj.print_heap()
-print("--")
-obj.pop()
-obj.print_heap()
-print("--")
-obj.pop()
-obj.print_heap()
-print("--")
-obj.pop()
-obj.print_heap()
-print("--")
+t.assertEqual(1, obj.size())
+t.assertEqual([8], obj.arr)
 
+obj.push(4)
+t.assertEqual(2, obj.size())
+t.assertEqual([4,8], obj.arr)
+
+obj.push(3)
+t.assertEqual(3, obj.size())
+t.assertEqual([3,8,4], obj.arr)
+
+obj.push(5)
+t.assertEqual(4, obj.size())
+t.assertEqual([3,5,4,8], obj.arr)
+
+with t.assertRaises(Exception): # push() to a heap that exceeds capacity should raise an exception
+    obj.push(10)
+
+
+t.assertEqual(obj.pop(), 3)
+t.assertEqual(3, obj.size())
+t.assertEqual([4,5,8], obj.arr)
+
+t.assertEqual(obj.pop(), 4)
+t.assertEqual(2, obj.size())
+t.assertEqual([5,8], obj.arr)
+
+t.assertEqual(obj.pop(), 5)
+t.assertEqual(1, obj.size())
+t.assertEqual([8], obj.arr)
+
+t.assertEqual(obj.pop(), 8)
+t.assertEqual(0, obj.size())
+t.assertEqual([], obj.arr)
+
+
+with t.assertRaises(Exception): # pop() from an empty heap should raise an exception
+    obj.pop()
+
+obj.push(5)
+t.assertEqual(1, obj.size())
+t.assertEqual([5], obj.arr)
+
+obj.push(5)
+t.assertEqual(2, obj.size())
+t.assertEqual([5,5], obj.arr)
+
+obj.push(5)
+t.assertEqual(3, obj.size())
+t.assertEqual([5,5,5], obj.arr)
+
+obj.push(5)
+t.assertEqual(4, obj.size())
+t.assertEqual([5,5,5,5], obj.arr)
+
+with t.assertRaises(Exception): # push() to a heap that exceeds capacity should raise an exception
+    obj.push(5)
